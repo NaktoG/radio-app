@@ -1,0 +1,55 @@
+<!-- Conrtainer Radio Player -->
+<div class="h-screen flex gap-8 justify-center items-center p-3">
+
+  <!-- Container Player Controls -->
+  <div>
+
+    <!-- Player -->
+    <div class="opacity-80" id="radioPlayer"></div>
+    <div class="mt-2">
+      <p class="text-white">{{ station?.name }}</p>
+    </div>
+    <!-- End Player -->
+
+    <!-- Loading -->
+    <div *ngIf="isLoading">
+      <p class="text-white">Loading...</p>
+    </div>
+    <!-- End Loading -->
+
+    <!-- Container Buttons -->
+    <div class="flex gap-5 justify-center mt-4">
+      <button
+        class="block drop-shadow-2xl rounded-md bg-blue-400 px-2 py-3 text-center text-sm font-semibold text-blue-950 shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        d
+        (click)="backClick()"
+      >
+        Back
+      </button>
+      <button
+        class="block drop-shadow-2xl rounded-md bg-blue-400 px-2 py-3 text-center text-sm font-semibold text-blue-950 shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        d
+        (click)="playPause()"
+      >
+        Pause
+      </button>
+      <button
+        class="block drop-shadow-2xl rounded-md bg-blue-400 px-2 py-3 text-center text-sm font-semibold text-blue-950 shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        (click)="nextClick()"
+      >
+        Next
+      </button>
+    </div>
+    <!-- End Container Buttons -->
+
+  </div>
+  <!-- End Container Player Controls -->
+
+  <!-- Container Img -->
+  <div>
+    <img class="max-h-80" [src]="station?.favicon" [alt]="station?.name" />
+  </div>
+  <!-- End Container Img -->
+
+</div>
+<!-- End Conrtainer Radio Player -->
