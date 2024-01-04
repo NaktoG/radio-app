@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FilteredComponent } from './components/filtered/filtered.component';
 import { AudioPlayerComponent } from './components/audioplayer/audioplayer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AudioPlayerComponent } from './components/audioplayer/audioplayer.compo
     AudioPlayerComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

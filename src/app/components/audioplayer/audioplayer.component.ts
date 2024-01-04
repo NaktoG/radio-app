@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 
 
 // Imports de entorno de desarrollo //
@@ -9,8 +9,8 @@ import { Player } from '../../models/player.model';
   templateUrl: './audioplayer.component.html',
   styleUrls: ['./audioplayer.component.css']
 })
-export class AudioPlayerComponent  {
-  public stationList: any[] = [];
+export class AudioPlayerComponent implements OnChanges {
+  @Input('station-list') stationList: any[] = [];
   public station: any = undefined;
   public index: number = 0;
   public audio!: Player;
@@ -20,12 +20,12 @@ export class AudioPlayerComponent  {
 
   constructor(){}
 
-  // ngAfterViewInit(): void {
-  //   setTimeout(()=>{
-  //     this.loadStation();
-  //   })
-  // }
 
+ngOnChanges(): void {
+  console.log(this.stationList)
+  this.station = this.stationList[0]
+  this.createPlayer()
+}
 
   createPlayer(){
     this.isLoading = true;
@@ -61,7 +61,6 @@ export class AudioPlayerComponent  {
     console.log('The App has EXPLOTED COMO EL ORTO!!! (y)')
   }
 
-
   nextClick() {
     this.index = this.index + 1;
     this.station =  this.stationList[this.index];
@@ -79,3 +78,6 @@ export class AudioPlayerComponent  {
   }
 
 }
+
+
+

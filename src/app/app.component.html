@@ -5,11 +5,14 @@
 <!-- End Container Title -->
 
 <!-- Filtered Component -->
-<filters></filters>
+<filters
+  (on-filters)="setQuery($event)"
+>
+</filters>
 <!-- End Filtered Component -->
 
 <!-- Player Component -->
-  <audioplayer></audioplayer>
+<ng-container *ngIf="stationList.length > 0">
+  <audioplayer [station-list]="stationList"> </audioplayer>
+</ng-container>
 <!-- End Player Component -->
-
-
