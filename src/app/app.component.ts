@@ -20,12 +20,13 @@ export class AppComponent {
 
   loadStationList() {
     fetch(this.url)
-      .then(resp => resp.json())
-      .then(data => {
-        this.stationList = data.map((station: any) => {
-          station.name = station.name.trim()
-          return station
-        })
+    .then(resp => resp.json())
+    .then(data => {
+      this.stationList = data.map((station: any) => {
+        station.name = station.name.trim()
+        return station
+      })
+      this.selectedStation = 0;
         console.log(this.stationList)
       })
       .catch(err => console.log(err))
