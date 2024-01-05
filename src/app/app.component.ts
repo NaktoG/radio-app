@@ -15,11 +15,6 @@ export class AppComponent {
 
   constructor() {}
 
-  // ngAfterViewInit(): void {
-  //   setTimeout(() => {
-  //     this.loadStation();
-  //   })
-  // }
 
   loadStationList() {
     fetch(this.url)
@@ -30,11 +25,8 @@ export class AppComponent {
           return station
         })
         console.log(this.stationList)
-        // this.station = this.stationList[this.index];
-        // this.createPlayer()
       })
       .catch(err => console.log(err))
-    // .finally( () => this.isLoading = false );
   }
 
 
@@ -48,9 +40,6 @@ export class AppComponent {
     console.log(this.url)
     this.loadStationList()
   }
-
-
-  // https://de1.api.radio-browser.info/json/stations/search?countrycode=AR&limit=300&offset=1&order=votes&reverse=true
 
 }
 
