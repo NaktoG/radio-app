@@ -1,4 +1,4 @@
-<!-- Container Filter -->
+<!-- Container Filter Countries -->
 <div class="flex flex-col justify-items-center content-center p-4">
 
   <!-- Container Label -->
@@ -30,7 +30,35 @@
   <!-- End Container Select -->
 
 </div>
-<!-- End Container Filter -->
+<!-- End Container Filter Countries -->
+<!-- Container Filter LImits -->
+<div class="flex flex-col justify-items-center content-center p-4">
+
+  <!-- Container Label -->
+  <div class="mb-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Limits Stations</label>
+  </div>
+  <!-- End Container Label -->
+
+  <!-- Container Select -->
+  <div class="flex flex-col gap-4 md:flex-row md:items-center">
+    <select
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4 md:mb-0"
+      [(ngModel)]="limit"
+      name="limit"
+    >
+      <option
+        *ngFor="let limit of limits; let index"
+        [value]="limit"
+      >
+        {{limit}}
+      </option>
+    </select>
+  </div>
+  <!-- End Container Select -->
+
+</div>
+<!-- End Container Filter Limits -->
 
 
 

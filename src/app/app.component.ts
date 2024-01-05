@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 
 // Imports de entorno de desarrollo //
-import { URL_BASE } from './utils/api.util';
+import { QUERY_OBJ, URL_BASE } from './utils/api.util';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,8 @@ import { URL_BASE } from './utils/api.util';
 })
 export class AppComponent {
   public title = 'Radio-App';
-  public url = URL_BASE;
+  private url = URL_BASE;
+  private queryObj = QUERY_OBJ;
   public stationList: any[] = [];
 
   constructor() {}
@@ -30,16 +31,24 @@ export class AppComponent {
   }
 
 
-  setQuery(queryObj: any){
-    console.log(queryObj)
-    const countryStart  = this.url.indexOf('countrycode')
-    const countryEnd = this.url.indexOf('=',countryStart)
-    const countryCode = this.url.slice(countryEnd + 1, countryEnd + 3)
-    this.url = this.url.replace(countryCode, queryObj.countryCode)
-    console.log(countryCode)
+  setQuery(queryFilters: any){
+    this.queryObj = {
+      ...this.queryObj,
+      ...queryFilters
+    }
+    let query: string = '?'
+    console.log(queryFilters)
+    for(let key in this.queryObj){
+      const value = this.queryObj[key]
+      query = `${query}${key}=${value}&`
+    }
+    query = query.slice(0, -1)
+    this.url = URL_BASE + query;
+
     console.log(this.url)
-    this.loadStationList()
+    this.loadStationList();
   }
+
 
 }
 
@@ -47,7 +56,7 @@ export class AppComponent {
 
 
 
-
+//https://de1.api.radio-browser.info/json/stations/search?countrycode=MX&limit=300&offset=1&order=votes&reverse=true
 
 
 

@@ -35,6 +35,7 @@ export type Radio = {
   geo_lat:                    null;
   geo_long:                   null;
   has_extended_info:          boolean;
+
 }
 
 export enum Codec {
