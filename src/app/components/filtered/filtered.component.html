@@ -1,16 +1,13 @@
 <!-- Container Filter Countries -->
 <div class="flex flex-col justify-items-center content-center p-4">
 
-  <!-- Container Label -->
-  <div class="mb-4">
-    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Country</label>
-  </div>
-  <!-- End Container Label -->
 
-  <!-- Container Select -->
-  <div class="flex flex-col gap-4 md:flex-row md:items-center">
+  <!-- Container Label -->
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Country</label>
+    <!-- End Label -->
+    <!-- Container Select Country -->
     <select
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4 md:mb-0"
+      class="bg-gray-50 border border-teal-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-teal-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 mb-3"
       [(ngModel)]="country"
       name="country"
     >
@@ -21,44 +18,49 @@
         {{country.country}}
       </option>
     </select>
-    <div>
-      <button class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:ml-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" (click)="sendFilters()">
-        <i class="fa-solid fa-volume-high text-white"></i>
-      </button>
-    </div>
-  </div>
-  <!-- End Container Select -->
+    <!-- End Select Contry -->
 
-</div>
+    <!-- Label -->
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Limits Stations</label>
+    <!-- End Label Limit -->
+    <!-- Select Limit  -->
+      <select
+        class="bg-gray-50 border border-teal-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-teal-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500 mb-4 md:mb-0"
+        [(ngModel)]="limit"
+        name="limit"
+      >
+        <option
+          *ngFor="let limit of limits; let index"
+          [value]="limit"
+        >
+          {{limit}}
+        </option>
+      </select>
+      <!-- End  Select Limit -->
+      <!-- Button Filters -->
+      <div class="mt-3">
+        <button class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" (click)="sendFilters()">
+          <i class="fa-solid fa-volume-high text-white"></i>
+        </button>
+      </div>
+      <!-- End Button Filters -->
+
+
+  </div>
+
+
 <!-- End Container Filter Countries -->
 <!-- Container Filter LImits -->
-<div class="flex flex-col justify-items-center content-center p-4">
 
-  <!-- Container Label -->
-  <div class="mb-4">
-    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Limits Stations</label>
-  </div>
-  <!-- End Container Label -->
 
-  <!-- Container Select -->
-  <div class="flex flex-col gap-4 md:flex-row md:items-center">
-    <select
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4 md:mb-0"
-      [(ngModel)]="limit"
-      name="limit"
-    >
-      <option
-        *ngFor="let limit of limits; let index"
-        [value]="limit"
-      >
-        {{limit}}
-      </option>
-    </select>
-  </div>
-  <!-- End Container Select -->
 
-</div>
-<!-- End Container Filter Limits -->
+
+
+
+
+
+
+
 
 
 

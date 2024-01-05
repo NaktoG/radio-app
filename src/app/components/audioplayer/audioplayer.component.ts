@@ -11,6 +11,7 @@ import { Player } from '../../models/player.model';
 })
 export class AudioPlayerComponent implements OnChanges {
   @Input('station-list') stationList: any[] = [];
+  @Input('selected-station') selectedStation = 0;
   public station: any = undefined;
   public index: number = 0;
   public audio!: Player;
@@ -23,7 +24,8 @@ export class AudioPlayerComponent implements OnChanges {
 
 ngOnChanges(): void {
   console.log(this.stationList)
-  this.station = this.stationList[0]
+  this.index = this.selectedStation
+  this.station = this.stationList[this.selectedStation]
   this.createPlayer()
 }
 

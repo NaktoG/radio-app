@@ -13,6 +13,7 @@ export class AppComponent {
   private url = URL_BASE;
   private queryObj = QUERY_OBJ;
   public stationList: any[] = [];
+  public selectedStation: number = 0
 
   constructor() {}
 
@@ -49,6 +50,10 @@ export class AppComponent {
     this.loadStationList();
   }
 
+  setStationIndex(stationIndex: number) {
+    console.log(stationIndex)
+    this.selectedStation = stationIndex;
+  }
 
 }
 
