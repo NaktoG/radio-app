@@ -5,7 +5,7 @@
     <!-- Player -->
     <div class="opacity-80" id="radioPlayer"></div>
     <div class="mt-2 w-32">
-      <p class="text-white line-clamp-2 mx-6">{{ station?.name }}</p>
+      <p class="text-white line-clamp-1 mx-auto">{{ station?.name }}</p>
     </div>
     <!-- End Player -->
 
@@ -42,7 +42,7 @@
 
   <!-- Container Img -->
   <div class="p-3 w-full md:w-1/2 h-64">
-    <img class="w-64 h-64" [src]="station?.favicon" [alt]="station?.name" />
+    <img class="w-64 h-64 mx-auto pb-8" [src]="station?.favicon" [alt]="station?.name" />
   </div>
   <!-- End Container Img -->
 </div>
