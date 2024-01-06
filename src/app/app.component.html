@@ -15,14 +15,14 @@
   <!-- End Filtered Component -->
 
   <!-- Player Component -->
-  <ng-container *ngIf="stationList.length > 0">
-    <audioplayer [station-list]="stationList"> </audioplayer>
+  <ng-container *ngIf="isLoaded">
+    <audioplayer> </audioplayer>
   </ng-container>
   <!-- End Player Component -->
 
   <!-- Station List Component -->
-  <ng-container *ngIf="stationList.length > 0">
-    <station-list [station-list]="stationList"> </station-list>
+  <ng-container *ngIf="isLoaded">
+    <station-list > </station-list>
   </ng-container>
   <!-- End Station List Component -->
 </div>

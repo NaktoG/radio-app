@@ -5,6 +5,7 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } fro
 import { Player } from '../../models/player.model';
 import { NavStationService } from '../../services/nav-station.service';
 import { Observable } from 'rxjs';
+import { StationListServiceService } from 'src/app/services/station-list-service.service';
 
 @Component({
   selector: 'audioplayer',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./audioplayer.component.css']
 })
 export class AudioPlayerComponent implements OnInit, OnChanges{
-  @Input('station-list') stationList: any[] = [];
+  public stationList: any[] = [];
   public station: any = undefined;
   public index: number = 0;
   public audio!: Player;
@@ -20,19 +21,25 @@ export class AudioPlayerComponent implements OnInit, OnChanges{
   private errorCounter: number = 0;
 
 
-  constructor(private navStationService: NavStationService){}
+  constructor(private navStationService: NavStationService, private stationListService: StationListServiceService){}
 
   ngOnInit(): void {
     const obs: Observable<number> = this.navStationService.getStationIndex()
     obs.subscribe( newIndex => {
       this.index = newIndex
-      this.station = this.stationList[newIndex]
+      this.station = this.stationList[this.index]
       this.createPlayer()
     })
+    this.stationListService.getStationList().subscribe( newStationList => {
+      this.stationList = newStationList
+      this.station = this.stationList[this.index]
+      this.createPlayer()
+    } )
   }
-ngOnChanges(changes: SimpleChanges): void {
-  this.station = this.stationList[this.index]
-}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.station = this.stationList[this.index]
+  }
 
   createPlayer(){
     this.isLoading = true;
