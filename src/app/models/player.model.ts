@@ -6,7 +6,15 @@ export class Player  {
 
   private constructor( ){}
 
-  public static getInstance(audioUrl: string, elementId?: string ) {
+  /**
+   *  @example
+  * This is a good example
+ * Player.getInstance('https://example.com/audio.mp3', 'htmlId')npm start
+ * @param {string} audioUrl index de la station seleccionada
+ * @param {string} elementId? index de la station seleccionada
+ * @returns {Player} return intance of the class
+ */
+  public static getInstance(audioUrl: string, elementId?: string ): Player {
     if(!this.instance){
       this.instance = new Player()
     }

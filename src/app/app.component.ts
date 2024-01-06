@@ -2,6 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 
 // Imports de entorno de desarrollo //
 import { QUERY_OBJ, URL_BASE } from './utils/api.util';
+import { NavStationService } from './services/nav-station.service';
 
 @Component({
   selector: 'app-root',
@@ -13,25 +14,21 @@ export class AppComponent {
   private url = URL_BASE;
   private queryObj = QUERY_OBJ;
   public stationList: any[] = [];
-  public selectedStation: number = 0
 
-  constructor() {}
-
+  constructor(private navStationService: NavStationService) {}
 
   loadStationList() {
     fetch(this.url)
     .then(resp => resp.json())
     .then(data => {
+      this.navStationService.setStationIndex(0)
       this.stationList = data.map((station: any) => {
         station.name = station.name.trim()
         return station
       })
-      this.selectedStation = 0;
-        console.log(this.stationList)
-      })
+    })
       .catch(err => console.log(err))
   }
-
 
   setQuery(queryFilters: any){
     this.queryObj = {
@@ -51,18 +48,13 @@ export class AppComponent {
     this.loadStationList();
   }
 
-  setStationIndex(stationIndex: number) {
-    console.log(stationIndex)
-    this.selectedStation = stationIndex;
-  }
-
 }
 
 
 
 
 
-//https://de1.api.radio-browser.info/json/stations/search?countrycode=MX&limit=300&offset=1&order=votes&reverse=true
+
 
 
 

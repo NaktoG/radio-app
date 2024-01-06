@@ -1,12 +1,15 @@
-<div class="border-2 rounded-md p-3 m-3 h-64 overflow-y-auto">
+
+<div class="p-3 m-3 h-64 overflow-y-auto">
   <station-list-item
-    class="text-white"
-    *ngFor="let station of stationList; let i = index"
+  *ngFor="let station of stationList; let i = index"
     (click)="sendStationIndex(i)"
     [station-name]="station.name"
+    [is-selected] = "selectedIndex === i"
   >
   </station-list-item>
 </div>
+
+
 
 
 

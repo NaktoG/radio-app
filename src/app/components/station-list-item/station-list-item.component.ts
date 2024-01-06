@@ -6,7 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./station-list-item.component.css']
 })
 export class StationListItemComponent implements OnInit {
-  @Input('station-name') stationName: string = ''
+  @Input('station-name') stationName: string = '';
+  @Input('is-selected') isSelected: boolean = false;
 
   constructor(){}
 

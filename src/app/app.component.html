@@ -1,32 +1,29 @@
-<!-- Container Title -->
-<div>
-  <img class="max-w-44 max-h-44 mx-auto mt-3" src="../assets/img/—Pngtree—free sound waves png download_7650678.png" alt="">
+<!-- Container Components -->
+<div class="p-2 mb-16">
+  <!-- Container Title -->
+  <div>
+    <img
+      class="max-w-44 max-h-44 mx-auto mt-3"
+      src="../assets/img/—Pngtree—free sound waves png download_7650678.png"
+      alt=""
+    />
+  </div>
+  <!-- End Container Title -->
+
+  <!-- Filtered Component -->
+  <filters (on-filters)="setQuery($event)"> </filters>
+  <!-- End Filtered Component -->
+
+  <!-- Player Component -->
+  <ng-container *ngIf="stationList.length > 0">
+    <audioplayer [station-list]="stationList"> </audioplayer>
+  </ng-container>
+  <!-- End Player Component -->
+
+  <!-- Station List Component -->
+  <ng-container *ngIf="stationList.length > 0">
+    <station-list [station-list]="stationList"> </station-list>
+  </ng-container>
+  <!-- End Station List Component -->
 </div>
-<!-- End Container Title -->
-
-<!-- Filtered Component -->
-<filters
-  (on-filters)="setQuery($event)"
->
-</filters>
-<!-- End Filtered Component -->
-
-<!-- Player Component -->
-<ng-container *ngIf="stationList.length > 0">
-  <audioplayer
-    [station-list]="stationList"
-    [selected-station]="selectedStation"
-  >
-  </audioplayer>
-</ng-container>
-<!-- End Player Component -->
-
-<!-- Station List Component -->
-<ng-container *ngIf="stationList.length > 0">
-<station-list
-  [station-list]="stationList"
-  (on-station-index)="setStationIndex($event)"
->
-</station-list>
-</ng-container>
-<!-- End Station List Component -->
+<!-- End Container Components -->

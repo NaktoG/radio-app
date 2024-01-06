@@ -1,17 +1,18 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 
 // Imports de entorno de desarrollo //
 import { Player } from '../../models/player.model';
+import { NavStationService } from '../../services/nav-station.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'audioplayer',
   templateUrl: './audioplayer.component.html',
   styleUrls: ['./audioplayer.component.css']
 })
-export class AudioPlayerComponent implements OnChanges {
+export class AudioPlayerComponent implements OnInit, OnChanges{
   @Input('station-list') stationList: any[] = [];
-  @Input('selected-station') selectedStation = 0;
   public station: any = undefined;
   public index: number = 0;
   public audio!: Player;
@@ -19,14 +20,18 @@ export class AudioPlayerComponent implements OnChanges {
   private errorCounter: number = 0;
 
 
-  constructor(){}
+  constructor(private navStationService: NavStationService){}
 
-
-ngOnChanges(): void {
-  console.log(this.stationList)
-  this.index = this.selectedStation
-  this.station = this.stationList[this.selectedStation]
-  this.createPlayer()
+  ngOnInit(): void {
+    const obs: Observable<number> = this.navStationService.getStationIndex()
+    obs.subscribe( newIndex => {
+      this.index = newIndex
+      this.station = this.stationList[newIndex]
+      this.createPlayer()
+    })
+  }
+ngOnChanges(changes: SimpleChanges): void {
+  this.station = this.stationList[this.index]
 }
 
   createPlayer(){
@@ -66,6 +71,8 @@ ngOnChanges(): void {
   nextClick() {
     this.index = this.index + 1;
     this.station =  this.stationList[this.index];
+    console.log('Next',this.index)
+    this.navStationService.setStationIndex(this.index)
     this.createPlayer()
   }
 
@@ -76,6 +83,7 @@ ngOnChanges(): void {
       this.index = this.stationList.length - 1
     }
     this.station =  this.stationList[this.index];
+    this.navStationService.setStationIndex(this.index)
     this.createPlayer()
   }
 
