@@ -17,7 +17,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges{
   public station: any = undefined;
   public index: number = 0;
   public audio!: Player;
-  public errorMessage: string =  '';
+  public isErrorMessage: boolean =  false;
   public isLoading: boolean = false;
   private errorCounter: number = 0;
 
@@ -72,7 +72,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges{
   }
 
   showFatalError(){
-    this.errorMessage = 'The App has EXPLOTED!!!'
+    this.isErrorMessage = true;
   }
 
   nextClick() {
