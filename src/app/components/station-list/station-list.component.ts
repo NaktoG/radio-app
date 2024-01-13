@@ -21,7 +21,7 @@ export class StationListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.stationList);
+
   }
 
 
@@ -30,8 +30,6 @@ export class StationListComponent implements OnInit {
  * @returns {void} no return
  */
   sendStationIndex(stationIndex: number): void{
-    console.log('Desde senStationIndex', stationIndex)
-    // this.stationIndexEmitter.emit(stationIndex)
     this.navStationService.setStationIndex(stationIndex)
   }
 

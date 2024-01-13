@@ -12,7 +12,7 @@ export class StationListItemComponent implements OnInit {
   constructor(){}
 
   ngOnInit(): void {
-    console.log(this.stationName)
+
   }
 
 }

@@ -17,8 +17,10 @@ export class AudioPlayerComponent implements OnInit, OnChanges{
   public station: any = undefined;
   public index: number = 0;
   public audio!: Player;
+  public errorMessage: string =  '';
   public isLoading: boolean = false;
   private errorCounter: number = 0;
+
 
 
   constructor(private navStationService: NavStationService, private stationListService: StationListServiceService){}
@@ -49,8 +51,6 @@ export class AudioPlayerComponent implements OnInit, OnChanges{
       this.errorCounter = 0;
     })
     .catch( err => {
-      console.log('ERROR',err)
-      console.log('this.index', this.index)
       this.errorCounter++
       if(this.errorCounter >= 5){
         this.showFatalError()
@@ -72,13 +72,12 @@ export class AudioPlayerComponent implements OnInit, OnChanges{
   }
 
   showFatalError(){
-    console.log('The App has EXPLOTED COMO EL ORTO!!! (y)')
+    this.errorMessage = 'The App has EXPLOTED!!!'
   }
 
   nextClick() {
     this.index = this.index + 1;
     this.station =  this.stationList[this.index];
-    console.log('Next',this.index)
     this.navStationService.setStationIndex(this.index)
     this.createPlayer()
   }

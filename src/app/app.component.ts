@@ -49,8 +49,6 @@ export class AppComponent {
     }
     query = query.slice(0, -1)
     this.url = URL_BASE + query;
-
-    console.log(this.url)
     this.loadStationList();
   }
 
