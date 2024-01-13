@@ -17,6 +17,9 @@
     <div *ngIf="isLoading">
       <p class="text-white h-auto mx-6">Loading...</p>
     </div>
+    <div *ngIf="isErrorMessage">
+      <p class="text-white text-center">Station ERROR!!</p>
+    </div>
     <!-- End Loading -->
 
     <!-- Container Buttons -->
@@ -54,9 +57,7 @@
       />
     </div>
   </ng-container>
-  <!-- <div>
-    <p class="text-white text-center">{{errorMessage}}</p>
-  </div> -->
+
   <!-- End Container Img -->
 </div>
 <!-- End Conrtainer Radio Player -->
