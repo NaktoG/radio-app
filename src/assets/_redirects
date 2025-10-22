@@ -1,0 +1,8 @@
+# Netlify Redirects para Radio App (Angular SPA)
+# ================================================
+# Este archivo es un respaldo del netlify.toml
+# Asegura que todas las rutas se redirijan a index.html
+# para que Angular Router pueda manejar la navegación
+
+# Redirigir todas las rutas a index.html con código 200 (rewrite, no redirect)
+/*    /index.html   200
