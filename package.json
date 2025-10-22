@@ -1,14 +1,30 @@
 {
   "name": "radio-app",
-  "version": "1.0.1",
+  "version": "2.0.0",
+  "description": "🎵 Aplicación web moderna de radio con streaming en vivo de estaciones de todo el mundo",
+  "author": "NaktoG",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "compodoc": "npx compodoc -p tsconfig.doc.json"
+    "lint": "ng lint",
+    "compodoc": "npx compodoc -p tsconfig.doc.json",
+    "docs:generate": "npx compodoc -p tsconfig.doc.json -d ./documentation --theme laravel"
   },
+  "keywords": [
+    "radio",
+    "streaming",
+    "music",
+    "angular",
+    "typescript",
+    "tailwindcss",
+    "clean-architecture",
+    "radio-browser"
+  ],
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.0",
