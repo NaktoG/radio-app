@@ -16,6 +16,27 @@
 
 ---
 
+## 🚨 ¿Problemas con el Error "translate pipe"?
+
+Si experimentas el error **"No pipe found with name 'translate'"**, tenemos una solución automática:
+
+### 🛠️ Solución en 1 Comando
+
+```bash
+# Ejecuta el script de solución automática
+./fix-translate-error.sh
+```
+
+📖 **[Ver Instrucciones Rápidas →](INSTRUCCIONES_RAPIDAS.md)**
+
+### 📦 ¿Quieres Desplegar la Aplicación?
+
+Consulta nuestra guía completa de despliegue:
+
+📚 **[Opciones de Despliegue →](DEPLOY_OPTIONS.md)** (Vercel, Netlify, VPS, GitHub Pages, Firebase)
+
+---
+
 ## 📑 Tabla de Contenidos
 
 - [Características](#-características)
