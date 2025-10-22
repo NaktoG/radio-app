@@ -42,7 +42,10 @@
 - **🌐 Acceso Global**: Miles de estaciones de radio de más de 190 países
 - **🔍 Búsqueda Avanzada**: Encuentra estaciones por nombre, país, género o idioma
 - **🎨 Diseño Moderno**: Interfaz intuitiva y responsive con Tailwind CSS
-- **🔐 Sistema de Autenticación**: Login y registro de usuarios (sin datos sensibles)
+- **🌍 Internacionalización (i18n)**: Soporte completo para Español e Inglés
+- **🌓 Modo Oscuro**: Dark mode completo con transiciones suaves
+- **🔐 Autenticación Segura**: Sistema robusto con bcrypt, JWT y rate limiting
+- **🔒 Privacidad Total**: Solo requiere alias - no email ni datos personales
 - **⭐ Favoritos**: Guarda tus estaciones preferidas
 - **📱 Responsive Design**: Optimizado para desktop, tablet y móvil
 - **♿ Accesibilidad**: Cumple con estándares de accesibilidad (a11y)
@@ -80,6 +83,38 @@
 
 ---
 
+## 🎉 Nuevas Características (v2.1)
+
+### 🌍 **Internacionalización (i18n)**
+- ✅ Soporte completo para **Español** e **Inglés**
+- ✅ Detección automática del idioma del navegador
+- ✅ Selector de idioma integrado en la interfaz
+- ✅ Preferencias guardadas en localStorage
+- ✅ Traducciones completas de toda la aplicación
+- ✅ Integración con `@ngx-translate`
+
+### 🌓 **Modo Oscuro (Dark Mode)**
+- ✅ Dark mode completo con **Tailwind CSS**
+- ✅ Toggle elegante para cambiar entre modos
+- ✅ Transiciones suaves y animadas
+- ✅ Paleta de colores optimizada para legibilidad
+- ✅ Preferencias guardadas en localStorage
+- ✅ Detección de preferencias del sistema
+
+### 🔐 **Autenticación Mejorada con Solo Alias**
+- ✅ **Registro simplificado**: Solo alias y contraseña
+- ✅ **BCrypt hashing**: 12 salt rounds para máxima seguridad
+- ✅ **JWT Tokens**: Tokens seguros con expiración de 7 días
+- ✅ **Rate Limiting**: Protección contra ataques de fuerza bruta
+  - 5 intentos máximos por 15 minutos
+  - Bloqueo automático de 30 minutos tras exceder el límite
+- ✅ **Generación de IDs únicos**: IDs criptográficos para cada usuario
+- ✅ **Sin datos personales**: No se solicita email ni información sensible
+- ✅ **Validación robusta**: Verificación de unicidad de alias
+- ✅ **Gestión de sesiones**: Verificación automática de tokens expirados
+
+---
+
 ## 🛠 Tecnologías
 
 ### Frontend Framework
@@ -87,8 +122,18 @@
 - **TypeScript 5.1.3** - Tipado estático
 - **RxJS 7.8.0** - Programación reactiva
 
+### Internacionalización
+- **@ngx-translate/core 15.0.0** - Sistema de traducción
+- **@ngx-translate/http-loader 8.0.0** - Cargador de traducciones
+
+### Seguridad
+- **bcryptjs 2.4.3** - Hashing de contraseñas
+- **@types/bcryptjs** - Tipos TypeScript para bcrypt
+- **jsonwebtoken 9.0.2** - Generación y verificación de JWT tokens
+- **@types/jsonwebtoken** - Tipos TypeScript para JWT
+
 ### Estilos
-- **Tailwind CSS 3.4.0** - Framework de utilidades CSS
+- **Tailwind CSS 3.4.0** - Framework de utilidades CSS con dark mode
 - **CSS3** - Animaciones y estilos custom
 
 ### Arquitectura y Patrones
@@ -389,7 +434,34 @@ radio-app/
 
 ### Medidas Implementadas
 
-#### 1. **Sanitización de Inputs**
+#### 1. **Autenticación Robusta**
+```typescript
+// Hashing de contraseña con BCrypt (12 salt rounds)
+const passwordHash = await cryptoService.hashPassword(password);
+
+// Verificación segura
+const isValid = await cryptoService.verifyPassword(password, hash);
+
+// Generación de JWT Token
+const token = jwtService.generateToken({
+  userId: user.id,
+  username: user.username,
+  role: user.role
+});
+```
+
+#### 2. **Rate Limiting**
+```typescript
+// Verificación de límite de intentos
+const check = rateLimiterService.isAllowed(alias);
+// 5 intentos máximos por 15 minutos
+// Bloqueo de 30 minutos tras exceder el límite
+
+// Registro de intento
+rateLimiterService.recordAttempt(alias, success);
+```
+
+#### 3. **Sanitización de Inputs**
 ```typescript
 // Sanitización de strings
 const sanitized = SanitizerUtil.sanitizeString(userInput);
@@ -398,31 +470,41 @@ const sanitized = SanitizerUtil.sanitizeString(userInput);
 const safeHtml = SanitizerUtil.sanitizeHtml(sanitizer, htmlContent);
 ```
 
-#### 2. **Validación de Formularios**
-- Validadores custom para username, password, email
-- Validación de fortaleza de contraseña
+#### 4. **Validación de Formularios**
+- Validadores custom para alias, password
+- Validación de fortaleza de contraseña (8+ caracteres, mayúsculas, minúsculas, números)
 - Prevención de caracteres especiales peligrosos
+- Verificación de unicidad de alias
 
-#### 3. **Protección XSS**
+#### 5. **Protección XSS**
 - Escape automático de contenido HTML
 - Uso de `DomSanitizer` de Angular
 - Pipe `safeHtml` para contenido confiable
 
-#### 4. **Protección CSRF**
+#### 6. **Protección CSRF**
 - Headers de seguridad en interceptors
-- Tokens para operaciones sensibles
+- JWT tokens para operaciones sensibles
 
-#### 5. **Almacenamiento Seguro**
-- Encriptación básica de datos en localStorage
-- No almacenamiento de contraseñas en texto plano
-- Tokens con expiración
+#### 7. **Almacenamiento Seguro**
+- Contraseñas hasheadas con BCrypt (nunca en texto plano)
+- JWT tokens con expiración automática
+- Verificación de tokens expirados
+- Generación de IDs únicos criptográficos
 
-#### 6. **HTTP Security Headers**
+#### 8. **HTTP Security Headers**
 ```typescript
 'X-Content-Type-Options': 'nosniff'
 'X-Frame-Options': 'DENY'
 'X-XSS-Protection': '1; mode=block'
 ```
+
+### Características de Privacidad
+
+- ✅ **Sin email requerido**: Solo alias y contraseña
+- ✅ **Sin datos personales**: No se recopila información sensible
+- ✅ **Identificadores únicos**: IDs generados criptográficamente
+- ✅ **Tokens seguros**: JWT con expiración de 7 días
+- ✅ **Protección contra fuerza bruta**: Rate limiting automático
 
 ### Buenas Prácticas de Seguridad
 
@@ -431,6 +513,9 @@ const safeHtml = SanitizerUtil.sanitizeHtml(sanitizer, htmlContent);
 3. **Auditorías de seguridad** regulares
 4. **Dependencias actualizadas** constantemente
 5. **HTTPS** en producción (recomendado)
+6. **Hashing robusto** con bcrypt (12 salt rounds)
+7. **Rate limiting** para prevenir ataques
+8. **JWT con expiración** para sesiones seguras
 
 ---
 
