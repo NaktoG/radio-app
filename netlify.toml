@@ -4,7 +4,7 @@
 # Configuración de Build
 [build]
   # Comando para compilar la aplicación en modo producción
-  command = "npm run build:prod"
+  command = "npm ci && npx ng build --configuration production"
   
   # Directorio donde se encuentran los archivos compilados
   publish = "dist/radio-app"
@@ -123,14 +123,14 @@
 
 # Producción (rama main)
 [context.production]
-  command = "npm run build:prod"
+  command = "npm ci && npx ng build --configuration production"
   
   [context.production.environment]
     NODE_ENV = "production"
 
 # Vista previa de Pull Requests
 [context.deploy-preview]
-  command = "npm run build:prod"
+  command = "npm ci && npx ng build --configuration production"
   
   [context.deploy-preview.environment]
     NODE_ENV = "preview"
