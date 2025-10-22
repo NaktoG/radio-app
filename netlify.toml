@@ -4,7 +4,7 @@
 # Configuración de Build
 [build]
   # Comando para compilar la aplicación en modo producción
-  command = "npm ci && npx ng build --configuration production"
+  command = "npm ci && npm run build:prod"
   
   # Directorio donde se encuentran los archivos compilados
   publish = "dist/radio-app"
@@ -12,7 +12,6 @@
   # Variables de entorno para el build
   [build.environment]
     NODE_VERSION = "18"
-    NPM_FLAGS = "--legacy-peer-deps"
 
 # Redirects y Rewrites para SPA (Single Page Application)
 # ========================================================
@@ -123,14 +122,14 @@
 
 # Producción (rama main)
 [context.production]
-  command = "npm ci && npx ng build --configuration production"
+  command = "npm ci && npm run build:prod"
   
   [context.production.environment]
     NODE_ENV = "production"
 
 # Vista previa de Pull Requests
 [context.deploy-preview]
-  command = "npm ci && npx ng build --configuration production"
+  command = "npm ci && npm run build:prod"
   
   [context.deploy-preview.environment]
     NODE_ENV = "preview"
